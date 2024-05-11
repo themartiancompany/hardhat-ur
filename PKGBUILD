@@ -7,7 +7,7 @@
 _pkgbase=hardhat
 pkgname="${_pkgbase}"
 pkgdesc='Ethereum development environment for professionals'
-pkgver=2.21.0
+pkgver=2.22.3
 pkgrel=1
 arch=(
   'any'
@@ -31,7 +31,7 @@ noextract=(
   "${_pkgbase}-${pkgver}.tgz"
 )
 sha512sums=(
-  "f039490152431151da575b21f452ee28b2e0085bfd10027e33ef086e34883e0a1e368decb392f51e018131f9c8f3c73b3b330466475cbb21a8a1b15e2b73abab"
+  '93c255d8409635c843e9a864836051e70295c58d0e88aa2dedfbb1888a512b47eb46ac8e963711daf2b081648bc3a60878370d340e31c9b8fb3a0ecd4b1af684'
 )
 
 package() {
