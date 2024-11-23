@@ -4,13 +4,21 @@
 # Maintainer: Truocolo <truocolo@aol.com>
 # Contributor: Filipe Bertelli <filipebertelli@tutanota.com>
 
+_node="nodejs"
 _pkgbase=hardhat
 pkgname="${_pkgbase}"
 pkgdesc='Ethereum development environment for professionals'
 pkgver=2.22.3
 pkgrel=1
 arch=(
-  'any'
+  'arm'
+  'x86_64'
+  'mips'
+  'i686'
+  'pentium4'
+  'aarch64'
+  'armv7l'
+  'armv6l'
 )
 _ns="NomicFoundation"
 url="https://github.com/${_ns}/${_pkgbase}"
@@ -18,7 +26,7 @@ license=(
   'custom'
 )
 depends=(
-  'nodejs'
+  "${_node}<23.0"
   'inherits'
 )
 makedepends=(
