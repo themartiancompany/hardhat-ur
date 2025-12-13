@@ -38,6 +38,13 @@ _evmfs_available="$( \
     -v \
     "evmfs" || \
     true)"
+if [[ ! -v "_evmfs" ]]; then
+  if [[ "${_evmfs_available}" != "" ]]; then
+    _evmfs="true"
+  elif [[ "${_evmfs_available}" == "" ]]; then
+    _evmfs="false"
+  fi
+fi
 _node="nodejs"
 if [[ "${_os}" == "Android" ]]; then
   _node="nodejs-lts"
