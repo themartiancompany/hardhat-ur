@@ -93,7 +93,7 @@ pkgdesc="${_pkgdesc[*]}"
 pkgver="2.22.3"
 _node_pkgver="23.0"
 _commit="1bb6f45662c9688a552cece2cc2e95a3929b543d"
-pkgrel=1
+pkgrel=2
 arch=(
   'arm'
   'x86_64'
@@ -121,21 +121,23 @@ if [[ "${_git}" == "true" ]]; then
     "git"
   )
 fi
-if [[ "${_npm}" == "true" ]]; then
-  _tag="${pkgver}"
-  _tag_name="pkgver"
-elif [[ "${_npm}" == "false" ]]; then
-  _tag="${_commit}"
-  _tag_name="commit"
-fi
-_tarname="${_pkg}-${_tag}"
-_tarfile="${_tarname}.${_archive_format}"
 _gitlab_sum="SKIP"
 _gitlab_sig_sum="SKIP"
 _bundle_sum="SKIP"
 _bundle_sig_sum="SKIP"
 _npm_sum="9e17a5fced5da0b72db8d91d986dfa815c6f1d04542edc34c6008e63ae783fbb"
 _npm_sig_sum="46f0e9454e4789efbda023956716a22f5259afa526ab7b0d765d157a1898f0d9"
+if [[ "${_npm}" == "true" ]]; then
+  _tag="${pkgver}"
+  _tag_name="pkgver"
+  _sum="${_npm_sum}"
+  _sig_sum="${_npm_sig_sum}"
+elif [[ "${_npm}" == "false" ]]; then
+  _tag="${_commit}"
+  _tag_name="commit"
+fi
+_tarname="${_pkg}-${_tag}"
+_tarfile="${_tarname}.${_archive_format}"
 # Dvorak
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
 # Truocolo
@@ -146,8 +148,8 @@ _evmfs_dir="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}"
 _evmfs_uri="${_evmfs_dir}/${_sum}"
 _evmfs_src="${_tarfile}::${_evmfs_uri}"
 _bundle_uri="${_evmfs_dir}/${_bundle_sum}"
-_bundle_src="${_tarfile}::${_evmfs_npm_uri}"
-_evmfs_npm_uri="${_evmfs_dir}/${_npm_sum}"
+_bundle_src="${_tarfile}::${_bundle_uri}"
+_evmfs_npm_uri="${_evmfs_dir}/${_sum}"
 _evmfs_npm_src="${_tarfile}::${_evmfs_npm_uri}"
 _evmfs_sig_uri="${_evmfs_dir}/${_sig_sum}"
 _evmfs_sig_src="${_tarfile}.sig::${_evmfs_sig_uri}"
