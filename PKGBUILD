@@ -30,7 +30,49 @@
 #   Filipe Bertelli
 #     <filipebertelli@tutanota.com>
 
+_os="$( \
+  uname \
+    -o)"
+_evmfs_available="$( \
+  command \
+    -v \
+    "evmfs" || \
+    true)"
 _node="nodejs"
+if [[ "${_os}" == "Android" ]]; then
+  _node="nodejs-lts"
+fi
+if [[ ! -v "_npm" ]]; then
+  _npm="true"
+fi
+if [[ ! -v "_git_http" ]]; then
+  _git_http="github"
+fi
+if [[ ! -v "_git" ]]; then
+  if [[ "${_npm}" == "true" ]]; then
+    _git="false"
+  elif [[ "${_npm}" == "false" ]]; then
+    _git="false"
+  fi
+fi
+if [[ ! -v "_archive_format" ]]; then
+  if [[ "${_npm}" == "true" ]]; then
+    _archive_format="tgz"
+  elif [[ "${_npm}" == "false" ]]; then
+    if [[ "${_evmfs}" == "true" ]]; then
+      if [[ "${_git}" == "true" ]]; then
+        _archive_format="bundle"
+      elif [[ "${_git}" == "false" ]]; then
+        _archive_format="tar.gz"
+      fi
+    elif [[ "${_evmfs}" == "false" ]]; then
+      _archive_format="tar.gz"
+      if [[ "${_git_http}" == "github" ]]; then
+        _archive_format="zip"
+      fi
+    fi
+  fi
+fi
 _pkg=hardhat
 pkgbase="${_pkg}"
 pkgname=(
@@ -41,7 +83,8 @@ _pkgdesc=(
   "environment."
 )
 pkgdesc="${_pkgdesc[*]}"
-pkgver=2.22.3
+pkgver="2.22.3"
+_node_pkgver="23.0"
 _commit="1bb6f45662c9688a552cece2cc2e95a3929b543d"
 pkgrel=1
 arch=(
@@ -60,13 +103,26 @@ license=(
   'custom'
 )
 depends=(
-  "${_node}<23.0"
+  "${_node}<${_node_pkgver}"
   # "inherits"
 )
 makedepends=(
   'npm'
 )
-_tarname="${_pkg}-${pkgver}"
+if [[ "${_git}" == "true" ]]; then
+  makedepends+=(
+    "git"
+  )
+fi
+if [[ "${_npm}" == "true" ]]; then
+  _tag="${pkgver}"
+  _tag_name="pkgver"
+elif [[ "${_npm}" == "false" ]]; then
+  _tag="${_commit}"
+  _tag_name="commit"
+fi
+_tarname="${_pkg}-${_tag}"
+_tarfile="${_tarname}.${_archive_format}"
 _npm_sum="9e17a5fced5da0b72db8d91d986dfa815c6f1d04542edc34c6008e63ae783fbb"
 _npm_sig_sum="46f0e9454e4789efbda023956716a22f5259afa526ab7b0d765d157a1898f0d9"
 if [[ "${_npm}" == "true" ]]; then
