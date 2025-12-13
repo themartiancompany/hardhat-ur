@@ -187,7 +187,7 @@ if [[ "${_evmfs}" == "true" ]]; then
   )
 elif [[ "${_evmfs}" == "false" ]]; then
   if [[ "${_npm}" == "true" ]]; then
-    _uri="${_npm_http}/@${_ns}/${_pkg}/-/${_tarfile}"
+    _uri="${_npm_http}/${_pkg}/-/${_tarfile}"
   elif [[ "${_npm}" == "false" ]]; then
     _uri="${url}"
   fi
