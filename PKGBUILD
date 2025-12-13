@@ -227,7 +227,7 @@ package() {
   npm \
     install \
       "${_npm_options[@]}" \
-      "${srcdir}/${_pkgbase}-${pkgver}.tgz"
+      "${srcdir}/${_tarfile}"
   rm \
     -fr \
       "${pkgdir}/usr/etc"
