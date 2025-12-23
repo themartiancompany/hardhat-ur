@@ -216,7 +216,7 @@ validpgpkeys=(
   '12D8E3D7888F741E89F86EE0FEC8567A644F1D16'
 )
 
-package() {
+package_hardhat() {
   local \
     _npm_options=()
   _npm_options=(
