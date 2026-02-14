@@ -30,10 +30,10 @@
 #   Filipe Bertelli
 #     <filipebertelli@tutanota.com>
 
-_os="$( \
+_os="$(
   uname \
     -o)"
-_evmfs_available="$( \
+_evmfs_available="$(
   command \
     -v \
     "evmfs" || \
