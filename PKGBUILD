@@ -95,7 +95,7 @@ pkgdesc="${_pkgdesc[*]}"
 pkgver="2.22.3"
 _node_pkgver="23.0"
 _commit="1bb6f45662c9688a552cece2cc2e95a3929b543d"
-pkgrel=11
+pkgrel=12
 arch=(
   'arm'
   'x86_64'
