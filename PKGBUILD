@@ -128,6 +128,12 @@ if [[ "${_git}" == "true" ]]; then
     "git"
   )
 fi
+provides=(
+  "nodejs-${_pkg}=${pkgver}"
+)
+conflicts=(
+  "nodejs-${_pkg}"
+)
 _gitlab_sum="SKIP"
 _gitlab_sig_sum="SKIP"
 _bundle_sum="SKIP"
