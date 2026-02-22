@@ -2,11 +2,12 @@
 
 # SPDX-License-Identifier: AGPL-3.0
 
-#    ----------------------------------------------------------------------
-#    Copyright © 2022, 2023, 2024, 2025  Pellegrino Prevete
+#    ------------------------------------------------------------------
+#    Copyright © 2022, 2023, 2024, 2025, 2026
+#                Pellegrino Prevete
 #
 #    All rights reserved
-#    ----------------------------------------------------------------------
+#    -------------------------------------------------------------------
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -134,6 +135,55 @@ _fur_mini() {
     "${_tmp_dir}/fur"
 }
 
+_check_tag_latest() {
+  local \
+    _pkgname="${1}" \
+    _msg=() \
+    _tag \
+    _tag_build \
+    _tag_current \
+    _tag_recipe \
+    _repo_dir
+  _repo_dir="/home/user/${_pkgname}"
+  git \
+    config \
+      --global \
+      --add \
+        "safe.directory" \
+        "${_repo_dir}"
+  _tag="$(
+    git \
+      -C \
+        "${_repo_dir}" \
+      tag |
+      sort \
+        -V |
+        tail \
+          -n \
+            1)"
+  _tag_build="${tag}"
+  _tag_current="${_tag_build}"
+  _tag_recipe="$(
+    recipe-get \
+      "${_repo_dir}/PKGBUILD" \
+      "pkgver" || \
+      true)-$(
+        recipe-get \
+          "${_repo_dir}/PKGBUILD" \
+          "pkgrel")"
+  _tag_current="${_tag_recipe}"
+  if [[ "${_tag}" != "${_tag_current}" ]]; then
+    _msg=(
+      "Current build tag '${_tag_current}',"
+      "latest tag '${_tag}'."
+    )
+    echo \
+      "${_msg[*]}"
+    exit \
+      0
+  fi
+}
+
 _requirements() {
   local \
     _fur_mini_opts=() \
@@ -166,6 +216,8 @@ _requirements() {
     "${ns}" \
     "fur" \
     "1.0.0.0.0.0.0.0.0.0.0.0.0.1.1.1.1-2"
+  _check_tag_latest \
+    "${_pkgname}"
   # ohoh
   recipe-get \
     -v \
@@ -177,10 +229,10 @@ _requirements() {
       "_commit")"
   _gl_dl_mini \
     "${ns}" \
-    "ethers.js" \
+    "${_pkgname}" \
     "${_commit}"
   mv \
-    "${HOME}/ethers.js-${_commit}.tar.gz" \
+    "${HOME}/${_pkgname}-${_commit}.tar.gz" \
     "/home/user/${_pkgname}"
 }
 
