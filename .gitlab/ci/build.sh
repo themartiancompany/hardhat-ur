@@ -175,13 +175,13 @@ _requirements() {
     recipe-get \
       "/home/user/${_pkgname}/PKGBUILD" \
       "_commit")"
-  _gl_dl_mini \
-    "${ns}" \
-    "ethers.js" \
-    "${_commit}"
-  mv \
-    "${HOME}/ethers.js-${_commit}.tar.gz" \
-    "/home/user/${_pkgname}"
+  # _gl_dl_mini \
+  #   "${ns}" \
+  #   "ethers.js" \
+  #   "${_commit}"
+  # mv \
+  #   "${HOME}/ethers.js-${_commit}.tar.gz" \
+  #   "/home/user/${_pkgname}"
 }
 
 _build() {
