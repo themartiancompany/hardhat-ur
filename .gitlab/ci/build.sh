@@ -166,22 +166,23 @@ _requirements() {
     "${ns}" \
     "fur" \
     "1.0.0.0.0.0.0.0.0.0.0.0.0.1.1.1.1-2"
-  # ohoh
-  recipe-get \
-    -v \
-    "/home/user/${_pkgname}/PKGBUILD" \
-    "_commit"
   _commit="$( \
     recipe-get \
       "/home/user/${_pkgname}/PKGBUILD" \
       "_commit")"
-  # _gl_dl_mini \
-  #   "${ns}" \
-  #   "ethers.js" \
-  #   "${_commit}"
-  # mv \
-  #   "${HOME}/ethers.js-${_commit}.tar.gz" \
-  #   "/home/user/${_pkgname}"
+  # _ns="$( \
+  #   recipe-get \
+  #     "/home/user/${_pkgname}/PKGBUILD" \
+  #     "_ns")"
+  # if [[ "${_ns}" != "themartiancompany" ]]; then
+  #   _gl_dl_mini \
+  #     "${ns}" \
+  #     "${_pkgname}" \
+  #     "${_commit}"
+  #   mv \
+  #     "${HOME}/${_pkgname}-${_commit}.tar.gz" \
+  #     "/home/user/${_pkgname}"
+  # fi
 }
 
 _build() {
