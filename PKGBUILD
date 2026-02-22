@@ -48,6 +48,8 @@ fi
 _node="nodejs"
 if [[ "${_os}" == "Android" ]]; then
   _node="nodejs-lts"
+elif [[ "${_os}" == "GNU/Linux" ]]; then
+  _node="nodejs-lts-jod"
 fi
 if [[ ! -v "_npm" ]]; then
   _npm="true"
@@ -116,6 +118,11 @@ depends=(
 makedepends=(
   'npm'
 )
+if [[ "${_evmfs}" == "true" ]]; then
+  makedepends+=(
+    "evmfs"
+  )
+fi
 if [[ "${_git}" == "true" ]]; then
   makedepends+=(
     "git"
