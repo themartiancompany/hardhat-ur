@@ -215,7 +215,15 @@ _requirements() {
   _gur_mini \
     "${ns}" \
     "fur" \
-    "1.0.0.0.0.0.0.0.0.0.0.0.0.1.1.1.1-2"
+    "1.0.0.0.0.0.0.0.0.0.1.1-5"
+  _gur_mini \
+    "${ns}" \
+    "fur" \
+    "1.0.0.0.0.0.0.0.0.0.1.1-5"
+  _gur_mini \
+    "${ns}" \
+    "reallymakepkg" \
+    "1.2.5-9"
   _check_tag_latest \
     "${_pkgname}"
   _commit="$( \
