@@ -279,7 +279,7 @@ _build() {
   true
   _cmd+=(
     "cd"
-      "/home/user/${_pkgname}" "&&"
+      "${_home}/${_pkgname}" "&&"
     "reallymakepkg"
       "${_reallymakepkg_opts[@]}"
       "--"
