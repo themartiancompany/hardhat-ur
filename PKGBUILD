@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0
 
 #    ----------------------------------------------------------------------
-#    Copyright © 2024, 2025  Pellegrino Prevete
+#    Copyright © 2024, 2025, 2026  Pellegrino Prevete
 #
 #    All rights reserved
 #    ----------------------------------------------------------------------
@@ -95,16 +95,17 @@ pkgdesc="${_pkgdesc[*]}"
 pkgver="2.22.3"
 _node_pkgver="23.0"
 _commit="1bb6f45662c9688a552cece2cc2e95a3929b543d"
-pkgrel=18
+pkgrel=19
 arch=(
+  'aarch64'
   'arm'
-  'x86_64'
+  'armv8l'
+  'armv7l'
+  'armv6l'
   'mips'
   'i686'
   'pentium4'
-  'aarch64'
-  'armv7l'
-  'armv6l'
+  'x86_64'
 )
 _ns="NomicFoundation"
 url="https://github.com/${_ns}/${_pkg}"
